@@ -1,0 +1,163 @@
+@import "tailwindcss";
+
+@theme {
+  --color-paper-ivory: #FBF9F5;
+  --color-paper-warm: #F7F4EE;
+  --color-paper-cream: #EFEAE0;
+  --color-paper-card: #FFFFFF;
+  --color-paper-border: #E5DFD3;
+  --color-paper-border-dark: #D4CBBC;
+  
+  --color-charcoal-primary: #1A1D20;
+  --color-charcoal-muted: #575D65;
+  --color-charcoal-subtle: #858D98;
+  
+  --color-pigment-cobalt: #2D5B88;
+  --color-pigment-cobalt-light: rgba(45, 91, 136, 0.12);
+  --color-pigment-sage: #4D7266;
+  --color-pigment-sage-light: rgba(77, 114, 102, 0.12);
+  --color-pigment-terracotta: #BA5A3A;
+  --color-pigment-terracotta-light: rgba(186, 90, 58, 0.12);
+  --color-pigment-rose: #B86576;
+  --color-pigment-rose-light: rgba(184, 101, 118, 0.12);
+  --color-pigment-ochre: #C4883A;
+  --color-pigment-ochre-light: rgba(196, 136, 58, 0.12);
+  
+  --font-serif: 'Fraunces', Georgia, serif;
+  --font-display: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+@layer base {
+  body {
+    background-color: #F7F4EE;
+    color: #1A1D20;
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3 {
+    letter-spacing: -0.02em;
+  }
+
+  code, pre, .font-mono {
+    font-family: var(--font-mono);
+  }
+}
+
+/* Tactile Fine-Art Paper Canvas Texture */
+.bg-paper-grain {
+  background-color: transparent;
+  background-image: 
+    radial-gradient(rgba(100, 70, 40, 0.04) 1px, transparent 1px),
+    radial-gradient(rgba(45, 91, 136, 0.02) 1px, transparent 1px);
+  background-size: 20px 20px, 40px 40px;
+}
+
+/* Tactile Paper Deck & Layer Shadows */
+.shadow-paper {
+  box-shadow: 
+    0 4px 20px -2px rgba(60, 45, 30, 0.06),
+    0 1px 3px 0 rgba(60, 45, 30, 0.04);
+}
+
+.shadow-paper-deck {
+  box-shadow: 
+    0 -12px 30px -4px rgba(45, 35, 25, 0.07),
+    0 20px 40px -6px rgba(45, 35, 25, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.shadow-paper-elevated {
+  box-shadow: 
+    0 20px 50px -10px rgba(40, 30, 20, 0.12),
+    0 8px 16px -4px rgba(40, 30, 20, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+/* Organic Watercolor Washes with soft diffusion */
+.wash-cobalt {
+  background: radial-gradient(circle at 40% 40%, rgba(45, 91, 136, 0.18) 0%, rgba(45, 91, 136, 0.05) 50%, transparent 75%);
+  filter: blur(24px);
+}
+
+.wash-terracotta {
+  background: radial-gradient(circle at 60% 50%, rgba(186, 90, 58, 0.16) 0%, rgba(186, 90, 58, 0.04) 55%, transparent 80%);
+  filter: blur(28px);
+}
+
+.wash-sage {
+  background: radial-gradient(circle at 50% 50%, rgba(77, 114, 102, 0.16) 0%, rgba(77, 114, 102, 0.04) 50%, transparent 75%);
+  filter: blur(24px);
+}
+
+.wash-ochre {
+  background: radial-gradient(circle at 45% 45%, rgba(196, 136, 58, 0.18) 0%, rgba(196, 136, 58, 0.05) 55%, transparent 75%);
+  filter: blur(24px);
+}
+
+/* Organic hand-painted brushstroke underline */
+.brush-stroke-underline {
+  position: relative;
+  display: inline-block;
+}
+
+.brush-stroke-underline::after {
+  content: '';
+  position: absolute;
+  left: -2px;
+  right: -2px;
+  bottom: -4px;
+  height: 6px;
+  background-color: rgba(186, 90, 58, 0.25);
+  border-radius: 4px 6px 3px 5px;
+  z-index: -1;
+  transform: rotate(-0.5deg);
+}
+
+/* 3D Perspective & Spatial Depth */
+.perspective-800 {
+  perspective: 800px;
+}
+
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.perspective-1400 {
+  perspective: 1400px;
+}
+
+.transform-style-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+/* Smooth tactile scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F7F4EE;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #D9D2C3;
+  border-radius: 4px;
+  border: 2px solid #F7F4EE;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #C4BAA6;
+}
+
+/* Accessible focus ring in warm cobalt */
+:focus-visible {
+  outline: 2px solid #2D5B88;
+  outline-offset: 3px;
+}
