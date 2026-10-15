@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}{{ project.title }} · {{ profile.name }}{% endblock %}
+{% block body %}
+<header class="site-header">
+  <a class="brand" href="{% url 'portfolio:home' %}">{{ profile.name }}</a>
+  <nav aria-label="Project navigation">
+    <a href="{% url 'portfolio:home' %}#projects">Projects</a>
+    <a href="{% url 'portfolio:home' %}#contact">Contact</a>
+  </nav>
+  <a class="btn btn-accent" href="{% url 'portfolio:home' %}#contact">Start a project</a>
+</header>
+
+<main class="project-detail section">
+  <p class="eyebrow">{{ project.category }} · {{ project.year }}</p>
+  <h1 class="reveal-up">{{ project.title }}</h1>
+  <p class="lead reveal-up">{{ project.short_description }}</p>
+  <p class="meta reveal-up">Role: {{ project.role }}</p>
+  <p class="meta reveal-up">{{ project.technologies }}</p>
+  <div class="project-links reveal-up">
+    {% if project.live_url %}<a href="{{ project.live_url }}" target="_blank" rel="noopener">Live website</a>{% endif %}
+    {% if project.source_url %}<a href="{{ project.source_url }}" target="_blank" rel="noopener">Source code</a>{% endif %}
+  </div>
+</main>
+
+<footer class="site-footer">
+  <p>© {{ year }} {{ profile.name }}</p>
+</footer>
+{% endblock %}
