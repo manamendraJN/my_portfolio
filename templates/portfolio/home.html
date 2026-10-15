@@ -1,0 +1,155 @@
+{% extends 'base.html' %}
+{% block title %}{{ profile.name }} · Portfolio{% endblock %}
+{% block body %}
+<header class="site-header">
+  <a class="brand" href="#hero">{{ profile.name }}</a>
+  <nav aria-label="Primary">
+    <a href="#projects">Projects</a>
+    <a href="#featured">Featured</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <a class="btn btn-accent" href="#contact">Start a project</a>
+</header>
+
+<main>
+  <section id="hero" class="hero section">
+    <p class="eyebrow reveal-up">{{ profile.role }}</p>
+    <h1 class="hero-title reveal-up">{{ profile.headline }}</h1>
+    <p class="hero-intro reveal-up">{{ profile.intro }}</p>
+    <div class="hero-actions reveal-up">
+      <a class="btn btn-accent" href="#projects">View projects</a>
+      <a class="btn btn-ghost" href="#about">About me</a>
+    </div>
+  </section>
+
+  <section id="about" class="section section-alt">
+    <div class="section-heading reveal-up">
+      <p class="eyebrow">About</p>
+      <h2>Creative engineering with editorial precision</h2>
+    </div>
+    <div class="split-grid">
+      <p class="lead reveal-up">I build performant digital experiences where strong typography, meaningful motion, and robust engineering work together.</p>
+      <ul class="about-list">
+        {% for item in about_points %}
+        <li class="reveal-up">{{ item }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </section>
+
+  <section id="projects" class="section">
+    <div class="section-heading reveal-up">
+      <p class="eyebrow">Selected projects</p>
+      <h2>Work spanning systems, product engineering, and AI</h2>
+    </div>
+    <div class="projects-grid">
+      {% for project in projects %}
+      <article class="project-card reveal-up">
+        <p class="meta">{{ project.category }} · {{ project.year }}</p>
+        <h3>{{ project.title }}</h3>
+        <p>{{ project.short_description }}</p>
+        <p class="meta">Role: {{ project.role }}</p>
+        <p class="meta">{{ project.technologies }}</p>
+        <div class="project-links">
+          <a href="{% url 'portfolio:project_detail' slug=project.slug %}">Details</a>
+          {% if project.live_url %}<a href="{{ project.live_url }}" target="_blank" rel="noopener">Live</a>{% endif %}
+          {% if project.source_url %}<a href="{{ project.source_url }}" target="_blank" rel="noopener">Code</a>{% endif %}
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section id="featured" class="section section-alt featured-story">
+    <div class="section-heading reveal-up">
+      <p class="eyebrow">Featured project experience</p>
+      <h2>Scroll-driven narrative block</h2>
+    </div>
+    {% if featured_project %}
+    <div class="featured-panel pin-scene">
+      <div class="featured-copy reveal-up">
+        <h3>{{ featured_project.title }}</h3>
+        <p>{{ featured_project.short_description }}</p>
+        <p class="meta">{{ featured_project.technologies }}</p>
+      </div>
+      <div class="horizontal-track" aria-hidden="true">
+        <div class="panel">Discovery</div>
+        <div class="panel">Architecture</div>
+        <div class="panel">Execution</div>
+      </div>
+    </div>
+    {% endif %}
+  </section>
+
+  <section id="skills" class="section">
+    <div class="section-heading reveal-up">
+      <p class="eyebrow">Skills & expertise</p>
+      <h2>Structured capabilities, no inflated claims</h2>
+    </div>
+    <div class="skills-grid">
+      {% for group, skills in skill_groups %}
+      <article class="skill-card reveal-up">
+        <h3>{{ group }}</h3>
+        <p>{{ skills|join:' · ' }}</p>
+      </article>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section id="process" class="section section-alt">
+    <div class="section-heading reveal-up">
+      <p class="eyebrow">Experience & process</p>
+      <h2>From systems reliability to product craftsmanship</h2>
+    </div>
+    <div class="timeline">
+      {% for item in timeline %}
+      <article class="timeline-item reveal-up">
+        <p class="meta">{{ item.period }}</p>
+        <h3>{{ item.title }}</h3>
+        <p class="meta">{{ item.organization }}</p>
+        <p>{{ item.description }}</p>
+      </article>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section id="contact" class="section contact">
+    <div class="section-heading reveal-up">
+      <p class="eyebrow">Contact</p>
+      <h2>Let’s build something memorable</h2>
+    </div>
+
+    {% if messages %}
+      <div class="messages" aria-live="polite">
+        {% for message in messages %}
+          <p class="message {{ message.tags }}">{{ message }}</p>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    <form method="post" class="contact-form reveal-up" novalidate>
+      {% csrf_token %}
+      {% for field in form %}
+      <div class="field">
+        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+        {{ field }}
+        {% for error in field.errors %}<p class="error">{{ error }}</p>{% endfor %}
+      </div>
+      {% endfor %}
+      <button class="btn btn-accent" type="submit">Send message</button>
+    </form>
+
+    <div class="contact-links reveal-up">
+      <a href="mailto:{{ profile.email }}">{{ profile.email }}</a>
+      <a href="{{ profile.github_url }}" target="_blank" rel="noopener">GitHub</a>
+      <a href="{{ profile.linkedin_url }}" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <p>© {{ year }} {{ profile.name }}</p>
+  <a href="#hero">Back to top</a>
+</footer>
+{% endblock %}
